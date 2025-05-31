@@ -16,6 +16,7 @@ const Login = () => {
   const [errors, setErrors] = useState({
     email: '',
     password: '',
+    authError: '',
   });
 
   const handleChange = (e, inputType) => {
@@ -45,14 +46,16 @@ const Login = () => {
         return;
       }
 
-      // Adjust path as needed
-
       const res = await axios.post('/login', formData);
 
       dispatch(addUser(res.data));
-      return navigate('/');
+      navigate('/');
     } catch (error) {
-      console.error(error.message);
+      setErrors((prev) => ({
+        ...prev,
+        authError: error?.response?.data,
+      }));
+      console.error(error?.response?.data);
     }
   };
 
@@ -100,6 +103,10 @@ const Login = () => {
         <button type="submit" className="btn btn-neutral mt-4">
           Login
         </button>
+
+        {errors.authError && (
+          <span className="text-sm text-red-500">{errors.authError}</span>
+        )}
       </form>
     </div>
   );

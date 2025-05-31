@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from '../utils/axiosInstance';
 
 const userSlice = createSlice({
   name: 'user',
@@ -7,8 +8,15 @@ const userSlice = createSlice({
     addUser: (state, action) => {
       return action.payload;
     },
-    removeUser: (state, action) => {
-      return null;
+    removeUser: async (state, action) => {
+      try {
+        const resp = await axios.post('/logout');
+        if (resp) {
+          return null;
+        }
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });
