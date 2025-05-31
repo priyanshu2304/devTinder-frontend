@@ -3,16 +3,16 @@ import axios from '../utils/axiosInstance';
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: null,
+  initialState: { isUserChecked: false },
   reducers: {
     addUser: (state, action) => {
-      return action.payload;
+      return { isUserChecked: true, ...action.payload };
     },
     removeUser: async (state, action) => {
       try {
         const resp = await axios.post('/logout');
         if (resp) {
-          return null;
+          return { isUserChecked: true };
         }
       } catch (error) {
         console.error(error);

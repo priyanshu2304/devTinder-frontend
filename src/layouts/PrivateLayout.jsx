@@ -25,6 +25,7 @@ const PrivateLayout = () => {
   };
 
   useEffect(() => {
+    console.log('Private');
     if (user?.firstName) return;
     fetchUser();
   }, []);

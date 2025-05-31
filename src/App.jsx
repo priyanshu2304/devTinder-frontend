@@ -7,27 +7,8 @@ import Login from './components/Login';
 import Feed from './components/Feed';
 import PublicLayout from './layouts/PublicLayout';
 import PrivateLayout from './layouts/PrivateLayout';
-import { useSelector } from 'react-redux';
 
 function App() {
-  const user = useSelector((store) => store.user);
-  const fetchUser = async () => {
-    try {
-      const resp = await axios.get('/profile/view');
-      dispatch(addUser(resp.data));
-    } catch (error) {
-      if (error.status === 401) {
-        navigate('/login');
-      }
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    console.log('user', user);
-    if (user?.firstName) return;
-    fetchUser();
-  }, []);
   return (
     <>
       <Routes>
