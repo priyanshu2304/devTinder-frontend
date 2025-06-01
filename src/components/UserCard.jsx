@@ -1,6 +1,11 @@
 import React from 'react';
 
-const UserCard = ({ shouldShowButton = true, user }) => {
+const UserCard = ({
+  shouldShowButton = true,
+  user,
+  handlePrimary,
+  handleSecondary,
+}) => {
   const {
     firstName,
     lastName,
@@ -10,7 +15,6 @@ const UserCard = ({ shouldShowButton = true, user }) => {
     skills,
     gender,
   } = user;
-  console.log('shouldShowButton', shouldShowButton);
   return (
     <div className="card bg-base-200 w-96 shadow-sm">
       <figure>
@@ -29,8 +33,12 @@ const UserCard = ({ shouldShowButton = true, user }) => {
         {skills && <p>{skills.join(',')}</p>}
         {shouldShowButton && (
           <div className="flex justify-center card-actions mt-2">
-            <button className="btn btn-secondary">Interested</button>
-            <button className="btn btn-primary">Ignore</button>
+            <button className="btn btn-secondary" onClick={handlePrimary}>
+              Interested
+            </button>
+            <button className="btn btn-primary" onClick={handleSecondary}>
+              Ignore
+            </button>
           </div>
         )}
       </div>

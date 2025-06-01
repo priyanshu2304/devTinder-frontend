@@ -74,6 +74,16 @@ const NavBar = () => {
                   <a
                     onClick={() => {
                       closeDropdown();
+                      navigate('/recieved');
+                    }}
+                  >
+                    Recieved
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => {
+                      closeDropdown();
                       handleLogout();
                     }}
                   >

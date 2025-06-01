@@ -9,6 +9,7 @@ import PublicLayout from './layouts/PublicLayout';
 import PrivateLayout from './layouts/PrivateLayout';
 import Connections from './components/Connections';
 import Recieved from './components/Recieved';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         </Route>
         <Route element={<PublicLayout />}>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<div>Sign Up</div>} />
+          <Route path="/signup" element={<SignUp />} />
         </Route>
       </Routes>
     </>

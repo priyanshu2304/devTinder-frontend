@@ -25,7 +25,6 @@ const PrivateLayout = () => {
   };
 
   useEffect(() => {
-    console.log('Private');
     if (user?.firstName) return;
     fetchUser();
   }, []);
@@ -38,7 +37,7 @@ const PrivateLayout = () => {
           <Footer />
         </>
       ) : (
-        <Navigate to="/login" />
+        <Outlet />
       )}
     </div>
   );

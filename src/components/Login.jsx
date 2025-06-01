@@ -29,6 +29,9 @@ const Login = () => {
     }));
   };
 
+  const handleSignup = (e) => {
+    navigate('/signup');
+  };
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -102,6 +105,13 @@ const Login = () => {
 
         <button type="submit" className="btn btn-neutral mt-4">
           Login
+        </button>
+        <button
+          type="button"
+          onClick={handleSignup}
+          className="btn btn-neutral mt-4"
+        >
+          Sign Up
         </button>
 
         {errors.authError && (

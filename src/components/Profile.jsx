@@ -151,8 +151,13 @@ const Profile = () => {
           </div>
         )}
       </form>
-      <div>
-        <UserCard user={formData} />
+      <div className="flex items-stretch">
+        <UserCard
+          user={formData}
+          shouldShowButton={false}
+          handlePrimary={() => console.log('hey')}
+          handleSecondary={() => console.log('bye')}
+        />
       </div>
     </div>
   );
