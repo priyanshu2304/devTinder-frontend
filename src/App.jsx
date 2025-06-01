@@ -7,6 +7,8 @@ import Login from './components/Login';
 import Feed from './components/Feed';
 import PublicLayout from './layouts/PublicLayout';
 import PrivateLayout from './layouts/PrivateLayout';
+import Connections from './components/Connections';
+import Recieved from './components/Recieved';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route element={<PrivateLayout />}>
           <Route path="/" element={<Feed />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/connections" element={<Connections />} />
+          <Route path="/recieved" element={<Recieved />} />
         </Route>
         <Route element={<PublicLayout />}>
           <Route path="/login" element={<Login />} />

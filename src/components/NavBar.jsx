@@ -64,10 +64,10 @@ const NavBar = () => {
                   <a
                     onClick={() => {
                       closeDropdown();
-                      alert('Settings clicked');
+                      navigate('/connections');
                     }}
                   >
-                    Settings
+                    Connections
                   </a>
                 </li>
                 <li>

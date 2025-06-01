@@ -64,7 +64,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen gap-4 my-10">
+    <div className="flex flex-col md:flex-row items-stretch justify-center gap-4 my-10 px-4">
       <form
         className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
         onSubmit={handleSubmit}
@@ -151,7 +151,9 @@ const Profile = () => {
           </div>
         )}
       </form>
-      <UserCard user={formData} />
+      <div>
+        <UserCard user={formData} />
+      </div>
     </div>
   );
 };

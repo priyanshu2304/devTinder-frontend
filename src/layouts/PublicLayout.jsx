@@ -7,11 +7,9 @@ import { Navigate } from 'react-router-dom';
 
 const PublicLayout = () => {
   const user = useSelector((store) => store.user);
-  useEffect(() => {
-    console.log('Public');
-  }, []);
+  useEffect(() => {}, []);
   return (
-    <div>
+    <div className="min-h-[90vh]">
       {user?.firstName ? (
         <Navigate to="/" />
       ) : (
