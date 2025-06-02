@@ -9,8 +9,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: 'priyanshumodi@gmail.com',
-    password: 'Priyanshu@98',
+    email: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({

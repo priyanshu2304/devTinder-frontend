@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import validator from 'validator';
 import axios from '../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../store/userSlice';
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -57,8 +60,8 @@ const Signup = () => {
 
     try {
       const res = await axios.post('/signup', formData);
-      console.log('Signup successful:', res.data);
-      navigate('/login');
+      dispatch(addUser(res.data.data));
+      navigate('/profile');
     } catch (err) {
       setErrors({ apiError: err?.response?.data || 'Signup failed' });
     }

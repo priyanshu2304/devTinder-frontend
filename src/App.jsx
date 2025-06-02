@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Body from './Body';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Feed from './components/Feed';
@@ -10,23 +9,31 @@ import PrivateLayout from './layouts/PrivateLayout';
 import Connections from './components/Connections';
 import Recieved from './components/Recieved';
 import SignUp from './components/SignUp';
+import RequireAuth from './components/RequiredAuth';
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route element={<PrivateLayout />}>
-          <Route path="/" element={<Feed />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/connections" element={<Connections />} />
-          <Route path="/recieved" element={<Recieved />} />
-        </Route>
-        <Route element={<PublicLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes>
+      {/* Public Routes */}
+      <Route element={<PublicLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Route>
+
+      {/* Protected Routes */}
+      <Route
+        element={
+          <RequireAuth>
+            <PrivateLayout />
+          </RequireAuth>
+        }
+      >
+        <Route path="/" element={<Feed />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/connections" element={<Connections />} />
+        <Route path="/recieved" element={<Recieved />} />
+      </Route>
+    </Routes>
   );
 }
 
