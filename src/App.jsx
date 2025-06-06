@@ -10,6 +10,7 @@ import Connections from './components/Connections';
 import Recieved from './components/Recieved';
 import SignUp from './components/SignUp';
 import RequireAuth from './components/RequiredAuth';
+import Premium from './components/Premium';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/connections" element={<Connections />} />
         <Route path="/recieved" element={<Recieved />} />
+        <Route path="/premium" element={<Premium />} />
       </Route>
     </Routes>
   );

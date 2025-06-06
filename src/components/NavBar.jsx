@@ -84,6 +84,16 @@ const NavBar = () => {
                   <a
                     onClick={() => {
                       closeDropdown();
+                      navigate('/premium');
+                    }}
+                  >
+                    Premium
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => {
+                      closeDropdown();
                       handleLogout();
                     }}
                   >
