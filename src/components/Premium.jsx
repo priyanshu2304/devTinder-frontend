@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../utils/axiosInstance';
 
 const plans = [
@@ -42,6 +42,7 @@ const plans = [
 
 const Premium = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [isUserPremium, setIsUserPremium] = useState(false);
 
   const handleBuy = async (type) => {
     try {
@@ -49,25 +50,26 @@ const Premium = () => {
         type,
       });
       if (resp.data) {
-        const { amount, currency, key, orderId, receipt, userId, notes } =
-          resp.data;
-        const { email, firstName, lastName, membershipType } = notes;
+        const { amount, currency, key, orderId, notes } = resp.data;
+        const { email, firstName, lastName } = notes;
+
         const options = {
           key,
           amount,
           currency,
           name: 'Dev Tinder',
-
           order_id: orderId,
           prefill: {
-            name: firstName + ' ' + lastName,
-            email: email,
+            name: `${firstName} ${lastName}`,
+            email,
             contact: '9999999999',
           },
           theme: {
             color: '#726b69',
           },
+          handler: verifyPremiumUser, // fix: should be `handler`, not `handle`
         };
+
         const rzp = new window.Razorpay(options);
         rzp.open();
       }
@@ -75,6 +77,39 @@ const Premium = () => {
       console.error(error);
     }
   };
+
+  const verifyPremiumUser = async () => {
+    try {
+      const resp = await axios.get('/paymentverify');
+      if (resp.data?.isPremium) {
+        setIsUserPremium(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
+
+  // ✅ Premium user message
+  if (isUserPremium) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-green-600 mb-4">
+            🎉 You're a Premium Member!
+          </h1>
+          <p className="text-lg">
+            Enjoy all the exclusive benefits and features.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ❌ Not premium — show plan selection
   return (
     <div className="min-h-screen py-10 px-4 flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold mb-10">Choose Your Membership</h1>
