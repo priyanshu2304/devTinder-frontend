@@ -67,7 +67,7 @@ const Premium = () => {
           theme: {
             color: '#726b69',
           },
-          handler: verifyPremiumUser, // fix: should be `handler`, not `handle`
+          handler: verifyPremiumUser,
         };
 
         const rzp = new window.Razorpay(options);

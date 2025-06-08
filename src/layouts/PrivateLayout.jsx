@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import NavBar from '../components/NavBar';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import axios from '../utils/axiosInstance';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../store/userSlice';
-import { Navigate } from 'react-router-dom';
 
 const PrivateLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useSelector((store) => store.user);
 
   const fetchUser = async () => {
@@ -28,13 +28,16 @@ const PrivateLayout = () => {
     if (user?.firstName) return;
     fetchUser();
   }, []);
+
+  const hideFooter = location.pathname.startsWith('/chat');
+
   return (
     <div>
       {user?.firstName ? (
         <>
           <NavBar />
           <Outlet />
-          <Footer />
+          {!hideFooter && <Footer />}
         </>
       ) : (
         <Outlet />

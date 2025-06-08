@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addConnection } from '../store/connectionSlice';
 import Loader from './Loader';
 import UserCard from './UserCard';
+import { useNavigate } from 'react-router-dom';
 
 const Connections = () => {
   const connections = useSelector((store) => store.connection);
-  console.log('connections', connections);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const fetchConnection = async () => {
@@ -47,7 +48,15 @@ const Connections = () => {
         </h1>
         {connections.map((connection) => (
           <div key={connection._id}>
-            <UserCard user={connection} shouldShowButton={false} />
+            <div className="indicator">
+              <span
+                onClick={() => navigate('/chat/' + connection._id)}
+                className="indicator-item badge badge-secondary cursor-pointer"
+              >
+                Chat
+              </span>
+              <UserCard user={connection} shouldShowButton={false} />
+            </div>
           </div>
         ))}
       </div>
